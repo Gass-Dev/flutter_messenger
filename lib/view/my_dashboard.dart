@@ -19,8 +19,8 @@ class _MyDashBoardState extends State<MyDashBoard> {
     return Scaffold(
       drawer: Container(
         height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width * 0.75,
-        color: Colors.purple,
+        width: MediaQuery.of(context).size.width,
+        color:const Color(0xFFe6fe4f),
         child: const MyProfil(),
       ),
       bottomNavigationBar: BottomNavigationBar(
