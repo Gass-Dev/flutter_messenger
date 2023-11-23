@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyCR6lzpIiIKWVIBg99c9kjA_0Gfo0MLuEQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>462066059212</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.ipssiFlutter</string>
+	<key>PROJECT_ID</key>
+	<string>ipssi-b40d9</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ipssi-b40d9.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:462066059212:ios:6529a4ff447f39da2fbf69</string>
+</dict>
+</plist>
