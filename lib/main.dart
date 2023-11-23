@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:ipssi_flutter/controller/my_permission_photo.dart';
 import 'package:ipssi_flutter/view/my_dashboard.dart';
-import 'package:ipssi_flutter/view/';
+import 'package:ipssi_flutter/view/my_loading.dart';
 import 'controller/my_firebase_helper.dart';
 import 'firebase_options.dart';
 import 'globale.dart';

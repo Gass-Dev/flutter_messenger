@@ -15,7 +15,7 @@ class _MyAllUsersState extends State<MyAllUsers> {
   late String currentUserUid; // Stocker l'UID de l'utilisateur connecté quand elle sera instancié
 
   @override
-  initState() {
+  void initState() {
     // 'UID de l'utilisateur connecté
     getCurrentUserUid();
   }

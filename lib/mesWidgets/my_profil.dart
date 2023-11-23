@@ -120,7 +120,6 @@ class _MyProfilState extends State<MyProfil> {
         children: [
           GestureDetector(
             onTap: () {
-              print("j'ai appuyé sur l'image");
               pickFilesPhoto();
             },
             child: CircleAvatar(

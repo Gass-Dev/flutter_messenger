@@ -1,4 +1,3 @@
-// TODO Implement this library.
 import 'package:ipssi_flutter/model/my_user.dart';
 
 MyUser moi = MyUser.empty();
