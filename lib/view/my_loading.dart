@@ -14,7 +14,6 @@ class _MyLoadingState extends State<MyLoading> {
   late PageController pageController;
   @override
   void initState() {
-    // TODO: implement initState
 
     super.initState();
     pageController = PageController();
