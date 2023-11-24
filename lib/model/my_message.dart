@@ -4,12 +4,14 @@ class Message {
   late String messageId;
   late String text;
   late String senderId;
+  late String senderAvatar;
   late Timestamp timestamp;
 
   Message.empty() {
     messageId = "";
     text = "";
     senderId = "";
+    senderAvatar = "";
     timestamp = Timestamp.now();
   }
 
@@ -19,11 +21,12 @@ class Message {
       messageId = snapshot.id;
       text = data['text'] ?? "";
       senderId = data['senderId'] ?? "";
+      senderAvatar = data['senderAvatar'] ?? "";
       timestamp = data['timestamp'] ?? Timestamp.now();
     } else {
       messageId = "";
       text = "";
-      senderId = "";
+      senderAvatar = "";
       timestamp = Timestamp.now();
     }
   }

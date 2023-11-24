@@ -1,13 +1,16 @@
-import 'package:firebase_core/firebase_core.dart' show Firebase, FirebaseOptions;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart' show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter/material.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  // Le reste de votre code...
+}
 
 class DefaultFirebaseOptions {
-  static Future<void> initializeFirebase() async {
-    await Firebase.initializeApp(
-      options: currentPlatform,
-    );
-  }
-
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
       return web;
