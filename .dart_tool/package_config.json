@@ -134,6 +134,24 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "firebase_database",
+      "rootUri": "file:///Users/gass/.pub-cache/hosted/pub.dev/firebase_database-10.3.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "firebase_database_platform_interface",
+      "rootUri": "file:///Users/gass/.pub-cache/hosted/pub.dev/firebase_database_platform_interface-0.2.5+13",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "firebase_database_web",
+      "rootUri": "file:///Users/gass/.pub-cache/hosted/pub.dev/firebase_database_web-0.2.3+13",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "firebase_storage",
       "rootUri": "file:///Users/gass/.pub-cache/hosted/pub.dev/firebase_storage-11.5.2",
       "packageUri": "lib/",
@@ -386,7 +404,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2023-11-23T22:29:36.829387Z",
+  "generated": "2023-11-24T15:30:10.008206Z",
   "generator": "pub",
   "generatorVersion": "3.2.0"
 }

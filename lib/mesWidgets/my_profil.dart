@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:ipssi_flutter/controller/my_firebase_helper.dart';
@@ -34,7 +33,6 @@ class _MyProfilState extends State<MyProfil> {
                   child: const Text("Annulation")),
               TextButton(
                   onPressed: () {
-                    //uploader l'image et l'enregistrer
                     MyFirebaseHelper()
                         .stockageImage(
                         bytes: bytesPhoto!,
@@ -87,7 +85,6 @@ class _MyProfilState extends State<MyProfil> {
                   child: const Text("Annuler")),
               TextButton(
                   onPressed: () {
-                    //enregistrer dans la base de donnée
                     String valeur = value.toUpperCase();
                     setState(() {
                       if (valeur == "NOM") {
@@ -100,7 +97,7 @@ class _MyProfilState extends State<MyProfil> {
                         moi.pseudo = valeurTapped.text;
                       }
                     });
-                    Map<String, dynamic> data = {valeur: valeurTapped.text};
+                    Map<String,dynamic> data = {valeur: valeurTapped.text};
                     MyFirebaseHelper().upadteUser(moi.uid, data);
 
                     //
@@ -124,7 +121,7 @@ class _MyProfilState extends State<MyProfil> {
             },
             child: CircleAvatar(
               radius: 80,
-              backgroundImage: NetworkImage(moi.image!),
+              backgroundImage: NetworkImage(moi.image),
             ),
           ),
           Row(
@@ -134,7 +131,7 @@ class _MyProfilState extends State<MyProfil> {
               const SizedBox(
                 width: 20,
               ),
-              Text(moi.mail),
+              Text(moi.email),
             ],
           ),
           Row(
@@ -162,7 +159,7 @@ class _MyProfilState extends State<MyProfil> {
           ),
           Row(
             children: [
-              Text(moi.pseudo!),
+              Text(moi.pseudo),
               IconButton(
                   onPressed: () {
                     popUp("pseudo");

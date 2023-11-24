@@ -1,8 +1,7 @@
-import 'dart:typed_data';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:ipssi_flutter/model/my_user.dart';
 
 class MyFirebaseHelper {
@@ -10,12 +9,12 @@ class MyFirebaseHelper {
   final cloudUsers = FirebaseFirestore.instance.collection("UTILISATEURS");
   final storage = FirebaseStorage.instance;
 
-  //créer un utilisateur
-  Future<MyUser> createUserFirebase(
-      {required String email,
-        required String password,
-        required String nom,
-        required prenom}) async {
+  Future<MyUser> createUserFirebase({
+    required String email,
+    required String password,
+    required String nom,
+    required String prenom,
+  }) async {
     UserCredential credential = await auth.createUserWithEmailAndPassword(
         email: email, password: password);
     String uid = credential.user!.uid;
@@ -28,48 +27,46 @@ class MyFirebaseHelper {
     return getUser(uid);
   }
 
-  //connecter un utilisateur
-  Future<MyUser> connectFirebase(
-      {required String email, required String password}) async {
+  Future<MyUser> connectFirebase({
+    required String email,
+    required String password,
+  }) async {
     UserCredential credential =
-    await auth.signInWithEmailAndPassword(email: email, password: password);
+        await auth.signInWithEmailAndPassword(email: email, password: password);
     String uid = credential.user!.uid;
     return getUser(uid);
   }
 
-  //récupérer les infos de l'utilisateur
   Future<MyUser> getUser(String uid) async {
     DocumentSnapshot snapshot = await cloudUsers.doc(uid).get();
-    return MyUser(snapshot);
+    return MyUser.fromSnapshot(
+        snapshot);
   }
 
-  //ajouter un utilisateur dans la base de donnée
-  addUser(String uid, Map<String, dynamic> data) {
-    cloudUsers.doc(uid).set(data);
+  Future<void> addUser(String uid, Map<String, dynamic> data) async {
+    await cloudUsers.doc(uid).set(data);
   }
 
-  //mettre à jour les infos d'un utilisateur
-  upadteUser(String uid, Map<String, dynamic> data) {
-    cloudUsers.doc(uid).update(data);
+  Future<void> updateUserData(String uid, Map<String, dynamic> data) {
+    return cloudUsers.doc(uid).update(data);
   }
 
-  //uploader l'image
-  Future<String> stockageImage(
-      {required Uint8List bytes,
-        required nameImage,
-        required String dossier,
-        required uid}) async {
+  Future<String> uploadImage({
+    required Uint8List bytes,
+    required String imageName,
+    required String folder,
+    required String uid,
+  }) async {
     TaskSnapshot snapshot =
-    await storage.ref("$dossier/$uid/$nameImage").putData(bytes);
-    String urlImage = await snapshot.ref.getDownloadURL();
-    return urlImage;
+        await storage.ref("$folder/$uid/$imageName").putData(bytes);
+    String imageUrl = await snapshot.ref.getDownloadURL();
+    return imageUrl;
   }
-  // Mets à jrs les favoris d'un utilisateur
+
   Future<void> updateFavorites(String uid, List<String> favoriteUserIds) {
     return cloudUsers.doc(uid).update({'favoris': favoriteUserIds});
   }
 
-  // Récupére les favoris d'un utilisateur
   Future<List<String>> getFavorites(String uid) async {
     DocumentSnapshot snapshot = await cloudUsers.doc(uid).get();
     if (snapshot.exists) {
@@ -78,7 +75,39 @@ class MyFirebaseHelper {
         return List<String>.from(userData['favoris']);
       }
     }
-    return []; // vide si pas de favoris
+    return [];
   }
 
+  Future<void> sendMessage({
+    required String messageText,
+    required String senderId,
+    required String chatId,
+  }) async {
+    try {
+      final chatRef =
+          FirebaseFirestore.instance.collection('chats').doc(chatId);
+      final messagesCollection = chatRef.collection('MESSAGES');
+      final messagesExist = await messagesCollection.get();
+
+      if (messagesExist.docs.isEmpty) {
+        await chatRef.set({'name': 'Conversation Name'});
+        await messagesCollection.add({});
+      }
+
+      await messagesCollection.add({
+        'text': messageText,
+        'senderId': senderId,
+        'timestamp': DateTime.now(),
+        'userId': senderId,
+      });
+    } catch (error) {
+      if (kDebugMode) {
+        print('Erreur lors de l\'envoi du message : $error');
+      }
+    }
+  }
+
+  stockageImage({required Uint8List bytes, required String nameImage, required String dossier, required uid}) {}
+
+  void upadteUser(uid, Map<String, dynamic> data) {}
 }

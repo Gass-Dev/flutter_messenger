@@ -19,7 +19,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MyLoading(),
+      debugShowCheckedModeBanner: false
     );
   }
 }

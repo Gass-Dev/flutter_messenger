@@ -5,23 +5,23 @@ import '../controller/my_firebase_helper.dart';
 import '../model/my_user.dart';
 
 class MyAllUsers extends StatefulWidget {
-  const MyAllUsers({Key? key});
+  const MyAllUsers({Key? key}) : super(key: key);
 
   @override
   State<MyAllUsers> createState() => _MyAllUsersState();
 }
+
 class _MyAllUsersState extends State<MyAllUsers> {
   Map<String, bool> favorites = {};
-  late String currentUserUid; // Stocker l'UID de l'utilisateur connecté quand elle sera instancié
+  late String currentUserUid;
 
   @override
   void initState() {
-    // 'UID de l'utilisateur connecté
+    super.initState();
     getCurrentUserUid();
   }
 
-  // Obbtenir l'UID de l'utilisateur connecté
-  getCurrentUserUid() {
+  void getCurrentUserUid() {
     final user = FirebaseAuth.instance.currentUser;
     currentUserUid = user?.uid ?? '';
   }
@@ -43,14 +43,14 @@ class _MyAllUsersState extends State<MyAllUsers> {
             return ListView.builder(
               itemCount: documents.length,
               itemBuilder: (context, index) {
-                MyUser lesAutres = MyUser(documents[index]);
-                final isFavorite = favorites.containsKey(lesAutres.uid) ? favorites[lesAutres.uid] : false;
-
-                // Sup l'utilisateur connecté de la liste affichée
+                MyUser lesAutres = MyUser.fromSnapshot(
+                    documents[index]);
+                final isFavorite = favorites.containsKey(lesAutres.uid)
+                    ? favorites[lesAutres.uid]
+                    : false;
                 if (lesAutres.uid == currentUserUid) {
                   return const SizedBox();
                 }
-
                 return Card(
                   elevation: 5,
                   shape: RoundedRectangleBorder(
@@ -59,14 +59,15 @@ class _MyAllUsersState extends State<MyAllUsers> {
                   child: ListTile(
                     leading: CircleAvatar(
                       radius: 80,
-                      backgroundImage: NetworkImage(lesAutres.image!),
+                      backgroundImage: NetworkImage(lesAutres.image),
                     ),
                     title: Text(lesAutres.nom),
-                    subtitle: Text(lesAutres.mail),
+                    subtitle: Text(lesAutres.email),
                     trailing: IconButton(
                       icon: Icon(
-                        // Chnage de couleur si on click
-                        isFavorite == true ? Icons.favorite : Icons.favorite_border,
+                        isFavorite == true
+                            ? Icons.favorite
+                            : Icons.favorite_border,
                         color: isFavorite == true ? Colors.red : Colors.grey,
                       ),
                       onPressed: () async {
@@ -74,7 +75,6 @@ class _MyAllUsersState extends State<MyAllUsers> {
                           favorites[lesAutres.uid] = !(isFavorite ?? false);
                         });
 
-                        // Mettre à jour la bdd si l'utilisateur a ajouté/retiré des favoris
                         if (favorites[lesAutres.uid] == true) {
                           List<String> updatedFavorites = [];
                           for (var entry in favorites.entries) {
@@ -82,8 +82,8 @@ class _MyAllUsersState extends State<MyAllUsers> {
                               updatedFavorites.add(entry.key);
                             }
                           }
-
-                          await MyFirebaseHelper().updateFavorites(lesAutres.uid, updatedFavorites);
+                          await MyFirebaseHelper()
+                              .updateFavorites(lesAutres.uid, updatedFavorites);
                         }
                       },
                     ),
