@@ -1,31 +1,43 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ipssi_flutter/globale.dart';
 
 class MyUser {
-  late String uid;
-  late String mail;
-  String? image;
+  late String userId;
   late String nom;
   late String prenom;
-  String? pseudo;
-  List? favoris;
+  late String email;
+  late String pseudo;
+  late String image;
 
-  MyUser.empty() {
-    uid = "";
-    mail = "";
-    nom = "";
-    prenom = "";
-    favoris = [];
-  }
-  MyUser(DocumentSnapshot snapshot) {
-    uid = snapshot.id;
+  MyUser.empty();
+
+  MyUser({
+    required this.userId,
+    required this.nom,
+    required this.prenom,
+    required this.email,
+    required this.pseudo,
+    required this.image,
+  });
+
+  factory MyUser.fromSnapshot(DocumentSnapshot snapshot) {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-    mail = data["EMAIL"];
-    nom = data["NOM"];
-    prenom = data["PRENOM"];
-    image = data["IMAGE"] ?? imageDefault;
-    favoris = data["FAVORIS"] ?? [];
-    pseudo = data["PSEUDO"] ?? "";
+    return MyUser(
+      userId: snapshot.id,
+      nom: data['NOM'] ?? '',
+      prenom: data['PRENOM'] ?? '',
+      email: data['EMAIL'] ?? '',
+      pseudo: data['PSEUDO'] ?? '',
+      image: data['IMAGE'] ?? '',
+    );
+  }
+
+  String get uid => userId;
+
+  setPseudo(String newPseudo) {
+    pseudo = newPseudo;
+  }
+
+  setImage(String newImage) {
+    image = newImage;
   }
 }
-

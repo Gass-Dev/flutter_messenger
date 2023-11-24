@@ -5,7 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'dart:async';
 
 class MyLoading extends StatefulWidget {
-  const MyLoading({Key? key});
+  const MyLoading({Key? key}) : super(key: key);
 
   @override
   State<MyLoading> createState() => _MyLoadingState();
@@ -44,13 +44,14 @@ class _MyLoadingState extends State<MyLoading> {
                 children: [
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.75,
-                    child: Lottie.asset("assets/monster.json"),
+                    child: Lottie.asset(
+                      "assets/monster.json",
+                    ),
                   ),
-                  const SizedBox(height: 10),
                   const Text(
-                    "Welcome to my app.",
+                    "Welcome to Messenger.",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 25,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
