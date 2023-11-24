@@ -19,7 +19,7 @@ class _MyLoadingState extends State<MyLoading> {
     super.initState();
     pageController = PageController();
 
-    Timer(const Duration(seconds:3), () {
+    Timer(const Duration(seconds: 3), () {
       if (mounted) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
@@ -36,19 +36,27 @@ class _MyLoadingState extends State<MyLoading> {
       body: Stack(
         children: [
           const MyBackground(),
-          Column(
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.75,
-                child: PageView(
-                  controller: pageController,
-                  children: [
-                    Lottie.asset("assets/monster.json"),
-                    const MyHomePage(title: "APP Map"),
-                  ],
-                ),
+          Center(
+            child: Container(
+              color: const Color(0xFFe6fe4f),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.75,
+                    child: Lottie.asset("assets/monster.json"),
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    "Welcome to my app.",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ],
       ),

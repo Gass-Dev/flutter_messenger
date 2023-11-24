@@ -24,13 +24,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Messenger',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.indigo,
           backgroundColor: const Color(0xFFe6fe4f),
-          // Autres attributs de ColorScheme
-          // ...
         ),
         useMaterial3: true,
       ),
