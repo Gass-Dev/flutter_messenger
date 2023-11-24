@@ -16,8 +16,9 @@ class _ConversationScreenState extends State<ConversationScreen> {
 
   void _sendMessage() {
     if (_messageController.text.isNotEmpty) {
-      FirebaseFirestore.instance.collection('MESSAGES').add({
+      FirebaseFirestore.instance.collection('messages').add({
         'text': _messageController.text,
+        'senderId': 'YOUR_SENDER_ID',
         'senderAvatar': 'URL_DE_TON_AVATAR',
         'timestamp': Timestamp.now(),
       });
@@ -68,7 +69,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
 }
 
 class MessageList extends StatelessWidget {
-  const MessageList({super.key});
+  const MessageList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
