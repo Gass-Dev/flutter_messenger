@@ -7,6 +7,7 @@ import 'package:ipssi_flutter/model/my_user.dart';
 class MyFirebaseHelper {
   final auth = FirebaseAuth.instance;
   final cloudUsers = FirebaseFirestore.instance.collection("UTILISATEURS");
+  final cloudMessage= FirebaseFirestore.instance.collection("MESSAGES");
   final storage = FirebaseStorage.instance;
 
   Future<MyUser> createUserFirebase({
