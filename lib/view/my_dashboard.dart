@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ipssi_flutter/mesWidgets/my_background.dart';
 import 'package:ipssi_flutter/mesWidgets/my_profil.dart';
 import 'package:ipssi_flutter/view/my_all_users.dart';
-import 'package:ipssi_flutter/view/my_loading_message.dart';
+import 'package:ipssi_flutter/view/my_messagerie.dart';
+
 
 class MyDashBoard extends StatefulWidget {
   const MyDashBoard({super.key});
@@ -19,8 +20,8 @@ class _MyDashBoardState extends State<MyDashBoard> {
     return Scaffold(
       drawer: Container(
         height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width * 0.75,
-        color: Colors.purple,
+        width: MediaQuery.of(context).size.width,
+        color:const Color(0xFFe6fe4f),
         child: const MyProfil(),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -48,7 +49,7 @@ class _MyDashBoardState extends State<MyDashBoard> {
   Widget bodyPage() {
     switch (indexTapped) {
       case 0:
-        return const MyLoadingMessage();
+        return const MyMessagerie();
       case 1:
         return const MyAllUsers();
       default:
